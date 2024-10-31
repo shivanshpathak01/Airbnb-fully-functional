@@ -21,6 +21,7 @@ async function main(){
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"))
+app.use(express.urlencoded({extended: true}));  // So that the data get parsed
 
 app.get("/",(req,res)=>{        // making APIs
     res.send("Hi, I am root"); 
@@ -31,6 +32,19 @@ app.get("/listings",async (req,res)=>{
     const allListings = await Listing.find({});
     res.render("listings/index.ejs",{allListings})
 })
+
+// New Route
+app.get("/listings/new",(req,res)=>{
+    res.render("listings/new.ejs")
+})
+
+// Show Route 
+app.get("/listings/:id",async (req,res)=>{
+    let {id} = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/show.ejs",{listing});
+})
+
 
 // app.get("/testListing",async (req,res)=>{
 //     let sampleListing = new Listing({
