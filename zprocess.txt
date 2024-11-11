@@ -1,3 +1,6 @@
 1. make json file first, install the express, mongoose, ejs ,nodemon(if not installed already), and other stuffs if you need
 1. make app.js and start the server, make routes according to the need
 2. connect the database, make models, basically make schema of the database
+
+
+// To convert put into post we use method override package
