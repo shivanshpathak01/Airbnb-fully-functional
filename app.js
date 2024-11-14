@@ -82,6 +82,35 @@ app.delete("/listings/:id", async (req,res)=>{
     
 })
 
+// check route
+app.get("/listings", async (req, res) => {
+    const allListings = await listing.find({});
+
+    // Debug each listing's image URL
+    allListings.forEach(listing => {
+        console.log(listing.image); // This should print the URL of each image in the console
+    });
+
+    res.render("listings/index", { allListings });
+});
+
+// sample data
+app.get("/testListing", async (req, res) => {
+    let sampleListing = new Listing({
+        title: "Sample Listing",
+        description: "A test listing with an image.",
+        image: "https://via.placeholder.com/150", // Sample image URL
+        price: 1200,
+        location: "City",
+        country: "Country"
+    });
+    await sampleListing.save();
+    console.log("Sample listing created with image");
+    res.send("Sample listing created");
+});
+
+
+
 // app.get("/testListing",async (req,res)=>{
 //     let sampleListing = new Listing({
 //     title:"My Home",
